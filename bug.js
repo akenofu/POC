@@ -1,19 +1,6 @@
 exploit = '{"root": {  "email": "Karim", "password": "pass"}}';
+exploit2 = '{  "val": [{  "email": "Karim", "password": "pass"} ] }';
 user = '{"email": "Karim", "password": "pass"}';
-
-
-
-exploit_parsed = JSON.parse(exploit)
-user_parsed = JSON.parse(user);
-
-console.log(exploit_parsed);
-console.log(user_parsed)
-
-
-if (user_parsed.email == 'admin' && user_parsed.password == 'password') {
-    console.log('logged in')
-}
-
 
 function validate(data) {
     if (!data.includes('email')) {
@@ -21,6 +8,8 @@ function validate(data) {
         return;
     }
     parsed = JSON.parse(data);
+    // data.email != data.root.email
+    console.log(parsed);
 
     valid_username = 'admin'
     valid_password = 'P@ssw0rd'
@@ -29,9 +18,14 @@ function validate(data) {
             console.log('Error')
             return
         }
+        // Log in Logic should be here
     }
     console.log('Code continued successfully')
 
 }
 
-validate(exploit)
+console.log('Testing proper input')
+validate(user)
+console.log('-------------')
+console.log('Testing malicious input')
+validate(exploit2)
